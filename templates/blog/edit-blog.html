@@ -1,0 +1,104 @@
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+
+
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="page-titles">
+                </div>
+                <div class="row">                  
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Add Blog</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="profile-tab">
+                                   <div class="settings-form">                                      
+                                        <form id="edit-profile" action="{% url 'blog:edit_blog'  %}?id={{blog.id}}"  method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                            <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>Title</label>
+                                                        <input type="text" value="{{blog.title}}" name="title" required class="form-control form-control-lg">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label>Choose File</label>
+                                                        <input type="file" accept="image/*" id="pic"  name="blog_pic"  class="form-control form-control-lg">
+                                                    </div>  
+                                                    <div class="form-group col-md-3">
+                                                        <label>Blog Image</label><br>
+                                                        {% if blog.image_file.url is not None %}
+                                                            <img src="{{blog.image_file.url}}" class="rounded-lg mr-2" width="34" alt="">
+                                                        {% else %}
+                                                            <img src="{% static 'admin-asset/images/No_image_available.png' %}" class="rounded-lg mr-18" width="64" alt="">
+                                                        {% endif %}
+                                                    </div> 
+                                                    <div class="form-group col-md-3">
+                                                        <label>Select Category</label><br>
+                                                        <select name="cate" id="cate" required>
+                                                        <option value="{{blog.category.id}}" selected>{{ blog.category.title }}</option>
+                                                        {% for category in  categories %}
+                                                        {% if blog.category.id != category.id %}
+                                                        <option value="{{category.id}}">{{ category.title }} </option>
+                                                        {% endif %}
+                                                      {% endfor %}
+                                                        </select>
+                                                    </div> 
+                                                    <div class="form-group col-md-12">
+                                                        <label>Content</label>
+                                                        <textarea id="content"  value="{{ blog.body }}" name="body" required class="form-control form-control-lg">{{blog.body}}</textarea>
+                                                    </div> 
+                                                </div>                               
+                                                <button class="btn btn-primary" type="submit">Save Blog</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+{% include "admin-includes/footer.html" %}
+<script type="text/javascript">
+    $("#edit-profile").validate({
+    rules: {
+        title: {
+            minlength: 5,
+            maxlength: 35,
+            
+        },
+        body:{
+            minlength: 4,
+            maxlength: 500,
+            
+        }
+        
+        
+  },
+  messages: {
+    title: {
+        
+        
+    },
+    body:{
+  
+        }
+  }
+});
+
+
+
+
+
+</script>
+
+<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('body');
+</script>      

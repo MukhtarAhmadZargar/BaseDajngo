@@ -1,0 +1,89 @@
+
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+   <div class="container-fluid">
+         <div class="page-titles">
+      
+         </div>
+         <div class="row">             
+            <div class="col-xl-12">
+            {% if messages %}
+                {% for message in messages %}
+                       <div class="alert alert-success">
+                     <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                  </div>
+                        {% endfor %}
+                    {% endif %}
+               
+               <div class="card">
+                     <div class="card-body">
+                     <div class="float-right">
+                     <div class="addlocation">
+                        <a class="mr-2" href="{% url 'blog:edit_blog' %}?id={{blog.id}}">Edit Blog</a>
+                        </div>
+                     </div>
+                        <div class="profile-tab d-flex position-relative">
+                           <div class="profile-imgbox">
+                           {% if blog.image_file %}
+                              <img src="{{blog.image_file.url}}" alt="image">
+                           {% else %}
+                              <img src="{% static 'admin-asset/images/dp.png' %}" alt="image">
+                           {% endif %}
+
+                           </div>
+                           
+                           <div class="profile-personal-info w-100">
+
+                                 <h4 class="text-primary mb-4">Blog Details</h4>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Title<span class="pull-right">:</span>
+                                       </h5>
+                                    </div>
+                                    <div class="col-9"><span>{{blog.title}}</span>
+                                    </div>
+                                 </div>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Date <span class="pull-right">:</span>
+                                       </h5>
+                                    </div>
+                                    <div class="col-9"><span>{{blog.created_on}}</span>
+                                    </div>
+                                 </div>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Category <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-9"><span>{{blog.category.title}}</span>
+                                  </div>
+                                  </div>
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Author<span class="pull-right">:</span>
+                                       </h5>
+                                    </div>
+                                    <div class="col-9"><span>{{blog.created_by_id}}</span>
+                                    </div>
+                                 </div><div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Content<span class="pull-right">:</span>
+                                       </h5>
+                                    </div>
+                                    <div class="col-9"><span>{{blog.body|safe}}</span>
+                                    </div>
+                                 </div>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+</div>
+
+
+{% endblock %}
+
+{% include "admin-includes/footer.html" %}

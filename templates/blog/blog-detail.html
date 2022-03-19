@@ -1,0 +1,264 @@
+{% load static %}
+{% include 'registration/header.html' %}
+{% block content %}
+    <div id="main-wrapper">
+        <div class="content-body">
+            <div class="ptb72">
+            	<div class="container">
+                <div class="form-head d-flex mb-3 mb-md-4 align-items-start">                                   
+                </div>              
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12  col-md-12 col-xxl-12 col-sm-12">
+                                        <div class="blog-img">
+                                        {% if blog.image_file %}
+                                            <img src="{{blog.image_file.url}}" class="img-fluid" alt="image">
+                                        {% else %}
+                                            <img class="img-fluid" src="{% static 'admin-asset/images/1500-0-.jpeg' %}" alt="">
+                                        {% endif %}         
+                                        </div>                                           
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12  col-md-12 col-xxl-12 col-sm-12">
+                                        <div class="product-detail-content">
+                                          
+                                            <div class="new-arrival-content pr">                                                
+                                                <div class="mt-3">
+                                                    <span class="mr-2"><i class="fa fa-calendar"></i>
+                                                       <time class="entry-date published">{{blog.created_on}}</time>
+                                                    </span>
+                                                    <span class="mr-2"><i class="fa fa-user"></i>
+                                                  <span>{{ blog.created_by_id }}</span>
+                                                    <span><i class="fa fa-tags"></i> <span class="screen-reader-text tm-hide mr-2">Categories</span>{{blog.category.title}}</span>
+                                                </div>
+                                                <h3 class="text-black mt-4">{{ blog.title }}</h3>
+                                               {{ blog.body|safe }}   
+                                               <br>
+                                               {% if ratings %}
+                                            {% for rating in ratings %}
+                                            {% if rating.rating == 1 %}
+                                            <form action="" method="POST">
+                                            {% csrf_token %}
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" checked />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div> <br>
+                                            
+
+                                           
+                                            </form>
+
+                                            {% elif rating.rating == 2 %}
+                                            <form  method="POST">
+                                            {% csrf_token %}
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" checked />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1"  />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div> <br>
+                                            </form>
+                                            {% elif rating.rating == 3 %}
+                                            <form  method="POST">
+                                            {% csrf_token %}
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" checked/>
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2"  />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1"  />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div> <br>
+                                            </form>
+                                            {% elif rating.rating == 4 %}
+                                            <form  method="POST">
+                                            {% csrf_token %}
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" checked />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2"  />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1"  />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div> <br>
+                                          
+                                            
+                                            </form>
+                                            {% else %}
+                                            <form  method="POST">
+                                            {% csrf_token %}
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5" checked />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2"  />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1"  />
+                                                <label for="star1" title="text">1 star</label>
+                                            </div> <br>
+                                            
+                                            
+                                            </form>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% else %}
+                                            <form action="{% url 'rating:rating' %}?id={{blog.id}}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="5"/>
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text">1 star</label>
+                                                
+                                            </div> 
+                                            
+                                            <input type= "submit" class="btn btn-primary read-morebtn mt-3" value="Rate Blog"> 
+                                          
+                                            {% endif %}
+                                            <br>                                         
+                                            </div>{% if user.is_authenticated %}
+                                            <div class=" mt-4">
+                                                <div class="user-img d-flex align-items-center">
+                                                    <img class="avatar-35 rounded-circle img-fluid mr-2" src="{{blog.image_file.url}}" alt="image">
+                                                    <div class="comment-form w-100">
+                                                    
+                                                    <form method="POST" action="{% url 'comments:Comment_Blog' %}?id={{blog.id}}">
+                                                    {% csrf_token %}
+                                                        <input type="text" name="comment" placeholder="Add a Public comment">
+                                                        <div class="addlocation">
+                                                        <input type="submit" class="btn btn-primary read-morebtn mt-3" value="Post Commnet"> 
+                                                    </form>
+                                                    {% else %}
+                                                        <a type="submit" class="btn btn-primary read-morebtn mt-3" class="mr-2" href="{% url 'accounts:login' %}"> Comment</a>
+                                                    {% endif %}
+								                </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                            
+                                            {% for comment in comments %}
+                                            <div class=" mt-4">
+                                                <div class="user-img d-flex">
+                                                {% if blog.created_by_id.profile_pic  %}
+                                                    <img class="avatar-35 rounded-circle img-fluid mr-2" src="{{ blog.created_by_id.profile_pic.url }}" alt="image">
+                                                {% else %}
+                                                <img class="avatar-35 rounded-circle img-fluid mr-2" src="{% static 'admin-asset/images/default.png' %}" alt="image">
+                                                {% endif %}
+                                                    <div class="username">
+                                                        <span class="text-dark">{{ comment.user }}</span>
+                                                        <p class="mb-0">{{ comment.created_on}}</p>
+                                                       
+                                                        {{ comment.body }}
+                                                        <i class="fa fa-heart text-danger"></i>
+                                                        <ul class="m-0 p-0 like-commentbox">
+                                                            <li><a href=""><i class="far fa-thumbs-up pr-2"></i> 123</a></li>
+                                                            <li><a href=""><i class="far fa-thumbs-down pr-2"></i>57</a></li>
+                                                            
+                                                            {% comment %} <button class="formButton1" type="button1" id="formButton1">Reply</button></li> {% endcomment %}
+                                                            <form id="form1" action="{% url 'comments:Reply_Comment' %}?id={{comment.id}}" class="form1" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="text" name="reply">
+                                                            <input type="text" name="blogid" value="{{blog.id}}" hidden>
+                                                            <button type="submit" id="submit">Reply</button>
+                                                            </form>
+                                                        </ul>
+                                                        <div id="replies">
+                                                        {% for reply in replies %}
+                                                        {% if reply.comment.id == comment.id %}
+                                                        <div class="mt-4">
+                                                            <div class="user-img d-flex">
+                                                            {% if reply.user.profile_pic %}
+                                                                <img src="{{ reply.user.profile_pic.url}}" class="avatar-35 rounded-circle img-fluid mr-2" alt="image">
+                                                            {% else %}
+                                                                <img class="avatar-35 rounded-circle img-fluid mr-2" src="{% static 'admin-asset/images/default.png' %}" alt="">
+                                                            {% endif %}
+                                                                <div class="username">
+                                                                    <span class="text-dark">{{ reply.user }}</span>
+                                                                    <p class="mb-0">{{ reply.created_on }}</p>
+                                                                    {{ reply.body }}
+                                                                    <i class="fa fa-heart text-danger"></i></p>
+                                                                    <ul class="m-0 p-0 like-commentbox">
+                                                                        <li><a href=""><i class="far fa-thumbs-up pr-2"></i> 123</a></li>
+                                                                        <li><a href=""><i class="far fa-thumbs-down pr-2"></i>57</a></li>
+                                                                        <li><a href="">Reply</a></li><i class=""></i>
+                                                                    </ul>
+                                                                    <a href="#" class="mt-2 d-flex hide-replies"><span class="fas fa-sort-down mr-2"></span> <span>Hide 10 replies</span></a>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div>  
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                                    </div>                                                
+                                                </div>                                             
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% include 'registration/footer.html' %}
+<script>
+const ratingStars = [...document.getElementsByClassName("rating__star")];
+
+function executeRating(stars) {
+  const starClassActive = "rating__star fas fa-star";
+  const starClassInactive = "rating__star far fa-star";
+  const starsLength = stars.length;
+  let i;
+  stars.map((star) => {
+    star.onclick = () => {
+      i = stars.indexOf(star);
+
+      if (star.className===starClassInactive) {
+        for (i; i >= 0; --i) stars[i].className = starClassActive;
+      } else {
+        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+      }
+    };
+  });
+}
+executeRating(ratingStars);
+</script>

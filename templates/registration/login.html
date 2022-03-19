@@ -1,0 +1,80 @@
+{% load static %}
+{% include 'registration/header.html' %}
+<style>
+    .error{
+      color : red; 
+    }
+ </style>
+<div id="main-wrapper">
+    <section class="contactussec ptb72">
+       <div class="container">            
+                <div class="row">
+                    <div class="contactus-formbox">                   
+                        <div class="mb60 section-title text-center">                          
+                            <h2>Login</h2>                           
+                        </div>
+                        {% if messages %}
+                     {% for message in messages %}
+                       <div class="alert alert-danger">
+                     <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                  </div>
+                        {% endfor %}
+                    {% endif %}                         
+                   <form  id="form-validate" method="POST" class="contact-us-form login-form">
+                    {% csrf_token %}                                                    
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group email">
+                                <input type="text" name="email" maxlength=50 class="form-control" id="email" placeholder="Enter Email" required>
+                            </div>
+                            </div> 
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">                         
+                                <div class="form-group password">
+                                    <input type="password" name="password"  class="form-control" id="password" placeholder="Enter Password" required>
+                                </div> 
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
+                                <div class="form-group d-flex flex-wrap justify-content-between">
+                                    <div class="custom-control custom-checkbox d-inline-block">
+                                        <input type="checkbox" name="remember_me" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                                    </div>
+                                    <a href="{% url 'accounts:password_reset'%}" class="font-size-3 text-dodger line-height-reset">Forgot Password?</a>
+                                </div>  
+                            </div>                                               
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center pt-3">
+                                <button type="submit" class="btn btn-secondary w-100">Login</button>
+                            </div>
+                        </div>                                   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="{% static 'assets/js/jquery-3.5.1.slim.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script type="text/javascript">
+    $("#form-validate").validate({
+        rules: {
+            email: {
+                required: true,
+            },
+        
+               password: {
+                required: true,
+            },
+        },
+        messages: {
+            email: {
+                required: "Please enter the email",
+            },
+            password: {
+                required: "Please enter the password",
+            },
+        }
+    });
+</script>
+{% include 'registration/footer.html' %}

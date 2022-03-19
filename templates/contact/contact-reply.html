@@ -1,0 +1,76 @@
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+
+ <div class="content-body">
+            <div class="container-fluid">
+                <div class="page-titles">
+                </div>
+                <div class="row">                  
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Reply Contact Mail</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="profile-tab">
+                                   <div class="settings-form">                                      
+                                        <form id="reply-form" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                            <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>Email</label>
+                                                        <input type="text" name="email" value="{{contact.email}}" readonly class="form-control form-control-lg" readonly>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Subject</label>
+                                                        <input type="text" name="subject" value="{{contact.subject}}" readonly class="form-control form-control-lg" readonly>
+                                                    </div>
+                                                     <div class="form-group col-md-6">
+                                                    <div class="file-placeholder">
+                                                        <label></label>
+                                                        <input type="file" accept="image/*" name="file" class="fileUpload form-control form-control-lg">
+                                                        <div class="file-browse">
+                                                            <span class="file-browse-txt">Select somes files </span>
+                                                            <span class="browse"><i class="far fa-paperclip"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label> Message </label>
+                                                        <textarea   name="message" rows="6" id="message"  placeholder="Message" maxlength="200" minlength="20" class="form-control form-control-lg"></textarea>
+                                                    </div>
+                                                <div class="form-group col-md-12">
+                                                                   
+                                                <button class="btn btn-primary" type="submit">Send</button>
+                                            </div>
+                                            </div>
+                                          
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% include "admin-includes/footer.html" %}
+
+<script type="text/javascript">
+    $("#reply-form").validate({
+    rules: {
+        message: {
+            minlength: 20,
+            maxlength: 255,
+        },
+  },
+  messages: {
+    mobile_no: {
+      minlength: "Reply must contain atleast 20 Characters",
+      maxlength: "Reply should not contain more than 200 Characters",
+    },
+  }
+});
+</script>

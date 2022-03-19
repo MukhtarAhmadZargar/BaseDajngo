@@ -1,0 +1,98 @@
+{%  include 'registration/header.html' %}
+{% load static %}
+
+<div id="main-wrapper">
+    <section class="contactussec ptb72">
+       <div class="container">  
+        
+                <div class="row">
+                    <div class="contactus-formbox">                   
+                        <div class="mb60 section-title text-center">                          
+                            <h2>Get In Touch</h2>
+                            <p>Reach out to us &amp; we will respond as soon as we can.</p>
+                        </div>                            
+                    <form class="contact-us-form" id="contactform" method="POST"> 
+                    {% csrf_token %}
+                    {% if messages %}
+                
+                    {% for message in messages %}
+                    <div class="alert alert-success">
+                     <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                  </div>
+                    {% endfor %}
+                
+         {% endif %} 
+                        <div class="row">
+                                 
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label class="sr-only control-label" for="name">name<span class=" "> </span></label>
+                                    <input id="name" name="name" type="text"  placeholder="Name" class="form-control input-md" required="" maxlength="20">
+                                </div>
+                            </div>                          
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label class="sr-only control-label" for="email">Email<span class=" "> </span></label>
+                                    <input id="email" name="email" type="email" placeholder="Email" class="form-control input-md" required="" maxlength="50">
+                                </div>
+                            </div>                            
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">                                   
+                                    <input name="subject" id="subject" type="text" placeholder="Subject" class="form-control input-md" required="" maxlength="30">
+                                </div>
+                            </div>                           
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">                                    
+                                    <textarea class="form-control" id="message" rows="7" name="message" placeholder="Message" maxlength="200"></textarea>
+                                </div>
+                            </div>                          
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center pt-3">
+                                <button type="submit" class="btn btn-secondary">Submit</button>
+                            </div>
+                        </div>                                   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="{% static 'assets/js/jquery-3.5.1.slim.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<script type="text/javascript">
+    $("#contactform").validate({
+        rules: {
+            email: {
+                required: true,
+            },
+            name: {
+                required: true,
+                maxlength: 30,
+            },
+             subject: {
+                required: true,
+                maxlength: 200,
+             },
+             message: {
+                required: true,
+             },
+        },
+        messages: {
+            email: {
+                required: "Please enter the email id",
+            },
+            name: {
+                required: "Please enter Valid Name",
+            },
+            subject: {
+                required: "Please Enter at least 10 character Subject",
+                   },
+            message: {
+                required: "Please Explain your message briefly",
+                   },
+        }
+    });
+
+
+</script>
+
+{% include 'registration/footer.html' %}

@@ -1,0 +1,89 @@
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+
+
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="page-titles">
+                </div>
+                <div class="row"> 
+                                 
+                    <div class="col-xl-12">
+                    {% if messages %}
+                    {% for message in messages %}
+                       <div class="alert alert-success">
+                        <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Add Blog</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="profile-tab">
+                                   <div class="settings-form">                                      
+                                        <form id="edit-profile" action="{% url 'blog:add_blog' %}"  method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                            <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>Title</label>
+                                                        <input type="text" placeholder="Enter Title" spellcheck="true" name="title" required class="form-control form-control-lg">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label>Choose Image </label>
+                                                        <input type="file" id="pic" accept="image/*"  name="blog_pic" required class="form-control form-control-lg">
+                                                    </div>  
+                                                    <div class="form-group col-md-3">
+                                                        <label>Select Category</label><br>
+                                                        <select class="form-select" name="cate" id="cate" required required aria-label="select example">
+                                                        {% for category in  categories %}
+                                                        <option value="{{category.id}}">{{ category.title }}</option>
+                                                      {% endfor %}
+                                                        </select>
+                                                    </div> 
+                                                    <div class="form-group col-md-12">
+                                                        <label>Content</label>
+                                                        <textarea id="content" id='body' spellcheck="true" placeholder="Describe yourself Content  here ..." name="body" required class="form-control form-control-lg"></textarea>
+                                                    </div> 
+                                                </div>                               
+                                                <button class="btn btn-primary" type="submit">Add Blog</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+{% include "admin-includes/footer.html" %}
+<script type="text/javascript">
+    $("#edit-profile").validate({
+    rules: {
+        title: {
+            maxlength: 35,   
+        },
+        body:{
+            maxlength: 500,   
+        }  
+  },
+  messages: {
+    title: {
+         
+    },
+    body:{
+  
+        }
+  }
+});
+</script>
+
+<script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('body');
+</script>      

@@ -1,0 +1,83 @@
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="page-titles">
+                </div>
+                <div class="row">                  
+                    <div class="col-xl-12">
+                        <div class="card">
+                        {% for message in messages %}
+                            <div class="alert alert-danger">
+                                <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                            </div>
+                        {% endfor %}
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Add Catagory</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="profile-tab">
+                                   <div class="settings-form">                                      
+                                       <form id="Add-User-form"   method="POST" action="{% url 'blog:add_catagory' %} " enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                            <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Title</label>
+                                                        <input type="text" spellcheck="true"  placeholder="Enter  Title"  name="title" id="title"  class="form-control form-control-lg">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Description</label>
+                                                        <textarea name="desc" spellcheck="true" maxlength="100" id="desc" class="form-control form-control-lg"></textarea>
+                                                    
+                                                    </div>
+                                                <div class="form-group col-md-12">
+                                                <button class="btn btn-primary" type="submit">Add</button></a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+{% include "admin-includes/footer.html" %}
+<script src="{% static 'assets/js/jquery-3.5.1.slim.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+ <script type="text/javascript">
+    $("#Add-User-form").validate({
+        rules: {
+   
+               title: {
+                
+                minlength:5,
+                maxlength:100,
+                required: true,
+            },
+             
+            desc: {
+                required: true,
+        },
+        },
+        messages: {
+            
+            title: {
+                minlength:"Please enter at least 5 alphabets in  Title",
+                maxlength:"Please enter no more than 100 characters in Title",
+                required: "Please enter  title",
+            },
+            desc: {
+                required: "Please enter Description",
+                },
+            
+            
+        }
+    });
+</script>
+  
+<style>
+

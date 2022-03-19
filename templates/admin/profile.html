@@ -1,0 +1,123 @@
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+   <div class="container-fluid">
+         <div class="page-titles">
+      
+         </div>
+         <div class="row">             
+            <div class="col-xl-12">
+                {% if messages %}
+                         {% for message in messages %}
+                       <div class="alert alert-success">
+                     <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                  </div>
+                        {% endfor %}
+                    {% endif %}
+               <div class="card">
+                     <div class="card-body">
+                     <div class="float-right">
+                     {% if user.is_superuser %}
+                     <div class="addlocation">
+                        <a class="mr-2" href="{% url 'Admin:Edit_User' %}?id={{user.id}}">Edit Profile</a>
+                        </div>
+                     {% endif %}
+                     </div>
+                        <div class="profile-tab d-flex position-relative">
+                           <div class="profile-imgbox">
+                           {% if user.profile_pic %}
+                              <img src="{{ user.profile_pic.url }}" alt="image">
+                           {% else %}
+                              <img src="{% static 'admin-asset/images/dp.png' %}" alt="image">
+                           {% endif %}
+                           </div>
+                           <div class="profile-personal-info w-100">
+                                 <h4 class="text-primary mb-4">Personal Information</h4>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Name <span class="pull-right">:</span>
+                                       </h5>
+                                    </div>
+                                    <div class="col-9"><span>{{user.username}}</span>
+                                    </div>
+                                 </div>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Email <span class="pull-right">:</span>
+                                       </h5>
+                                    </div>
+                                    <div class="col-9"><span>{{user.email}}</span>
+                                    </div>
+                                 </div>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">Role <span class="pull-right">:</span></h5>
+                                    </div>
+                                    {% if user.role_id == 1 %}
+                                    <div class="col-9"><span>Admin</span></div>
+                                    {% else %}
+                                       <div class="col-9"><span>User</span></div>
+                                    {% endif %}
+                                  </div>
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                       <h5 class="f-w-500">State <span class="pull-right">:</span></h5>
+                                    </div>
+                                    {% if user.state_id == 1 %}
+                                       <div class="col-9"><span  class="badge badge-success">Active</span></div>
+                                    {% elif user.state_id == 2 %}
+                                       <div class="col-9"><span  class="badge badge-warning">Inactive</span></div>
+                                    {% else %}
+                                       <div class="col-9"><span  class="badge badge-danger">Deleted</span></div>
+                                    {% endif %}
+                                 </div>  
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12">
+            {% if  user.is_superuser is False   %}
+                <div class="card">
+                    <div class="btn-list border-0 d-flex justify-content-end align-items-center">                            
+                        {% if user.state_id == 3 %}
+                           <div class="addlocation mr-2 ">
+                              <a href="{% url 'Admin:change_status_active' %}?id={{user.id}}" class="btn-success">Active</a>
+                           </div>
+                           <div class="addlocation mr-2">
+                              <a href="{% url 'Admin:change_status_inactive' %}?id={{user.id}}">Inactive</a>
+                           </div>
+
+                        {% elif user.state_id == 1 %}
+                           <div class="addlocation mr-2">
+                                 <a href="{% url 'Admin:change_status_inactive' %}?id={{user.id}}">Inactive</a>
+                           </div>
+                           <div class="addlocation mr-2">
+                                 <a href="{% url 'Admin:change_status_delete' %}?id={{user.id}}" class="btn-danger">Delete</a>
+                           </div>                        
+                        {% elif user.state_id == 2 %}
+                           <div class="addlocation mr-2">
+                                 <a href="{% url 'Admin:change_status_active' %}?id={{user.id}}" class="btn-success">Activate</a>
+                           </div>
+                           <div class="addlocation mr-2">
+                                 <a href="{% url 'Admin:change_status_delete' %}?id={{user.id}}" class="btn-danger">Delete</a>
+                           </div>
+                        {% else %}
+                           <div class="addlocation mr-2">
+                              <a href="{% url 'Admin:change_status_delete' %}?id={{user.id}}" class="btn-danger">Delete</a>
+                           </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+   </div>
+</div>
+
+{% endblock %}
+
+{% include "admin-includes/footer.html" %}Upload CSV

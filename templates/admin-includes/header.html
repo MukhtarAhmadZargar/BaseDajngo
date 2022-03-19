@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Python Base</title>
+    <!-- Favicon icon -->
+   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'admin-asset/images/favicon.png' %} "> 
+	<link href="{%  static 'admin-asset/vendor/owl-carousel/owl.carousel.css' %} " rel="stylesheet">
+    <link href="{%  static 'admin-asset/vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %} " rel="stylesheet">
+    <link href="{%  static 'admin-asset/css/style.css' %} " rel="stylesheet">
+    <link rel="stylesheet " type="text/css" href="{% static 'admin-asset/fontawesome/css/all.css' %}">
+</head>
+<body>
+
+    <!--**********Preloader start**********-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--***********Preloader end***********-->
+
+    <!--*************Main wrapper start*************-->
+    <div id="main-wrapper">
+
+        <!--************Nav header start************-->
+        <div class="nav-header">
+            <a href=" {% url 'frontend:index' %} " class="brand-logo">
+                <img class="logo-abbr" src="{% static 'admin-asset/images/logo.png' %}" alt="">
+                <h2 class="logo-compact">Python</h2>
+                <h2 class="brand-title">Python</h2>
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--***************Nav header end*************-->
+		
+		<!--**********Header start**********-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">
+                                Dashboard
+                            </div>
+                        </div>
+                        <ul class="navbar-nav header-right">
+                        	{% comment %} <li class="nav-item">
+                        		<div class="input-group search-area ml-auto d-inline-flex header-searchbox">
+									<input type="text" class="form-control" placeholder="Search here">
+									<div class="input-group-append">
+										<button type="button" class="input-group-text"><i class="flaticon-381-search-2"></i></button>
+									</div>
+								</div>
+                        	</li>  {% endcomment %}
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="javascript:;" role="button" data-toggle="dropdown">
+                                    {% if request.user.profile_pic %}
+                                        <img src="{{request.user.profile_pic.url}}"  width="20" alt=""/>
+                                    {% else %}
+                                        <img src="{% static 'admin-asset/images/dp.png' %} " width="20" alt=""/>
+                                    {% endif  %}
+									<div class="header-info">
+										<span>Hello,<strong> {{ request.user.username }}</strong></span>
+									</div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="{% url 'Admin:View_User' request.user.id %}" class="dropdown-item ai-icon">
+                                    <span id="icon-user1" class="far fa-user"></span>                                       
+                                        <span class="ml-2">Profile </span>
+                                    </a> 
+                                    <a href="{% url 'Admin:Password_Change' %}" class="dropdown-item ai-icon">
+                                      <span id="icon-logout" class="far fa-user-edit"></span>
+                                        <span class="ml-2">Change Password</span>
+                                        <span class="ml-2">
+                                    </a>                                                                  
+                                    <a href="{% url "accounts:logout" %}" class="dropdown-item ai-icon">
+                                        <span id="icon-logout" class="far fa-sign-out-alt"></span>                                       
+                                        <span class="ml-2">Logout </span>
+                                        <span class="ml-2">
+                                    </a>
+                                        
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--*******Header end ti-comment-alt*******-->
+
+        <!--**********Sidebar start*********-->
+        <div class="deznav">
+            <div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li><a  href="{% url 'frontend:index' %}" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-user"></i>
+							<span class="nav-text">Users</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'Admin:allusers' %}">Users</a></li>
+                        </ul>
+                    </li>   
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-cogs"></i>
+							<span class="nav-text">Manage</span>
+						</a>
+                        <ul aria-expanded="false">
+                        <li><a href="{% url 'backup:backup' %} ">BackUp</a></li>
+                        
+                        <li><a href="{% url 'history:login_history' %} ">Login History</a></li>		
+                        </ul>
+                    </li>               
+                   	  <li><a  href="{% url 'contactapp:contacts' %}" aria-expanded="false">
+							<i class="fas fa-address-book"></i>
+							<span class="nav-text">Contacts-Us</span>
+						</a>
+                    </li> 
+                    <li><a  href="{% url 'dblogger:loggs' %}" aria-expanded="false">
+                            <i class="fas fa-exclamation-triangle"></i>
+							<span class="nav-text">Logs</span>
+						</a>
+                    </li> 
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-381-television"></i>
+							<span class="nav-text">Blog</span>
+						</a>
+                        <ul aria-expanded="false">
+                        <li><a href="{% url 'blog:blog_list' %}">Blogs</a></li>
+                        <li><a href="{% url 'blog:Catagory' %} ">Category</a></li>	
+                        </ul>
+                    </li> 
+                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Pages</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'faq:faq_home' %}">FAQs</a></li>
+                            
+                            </li>                            
+                        </ul>
+                    </li>
+                </ul>
+			</div>
+        </div>
+        <!--************Sidebar end**********-->

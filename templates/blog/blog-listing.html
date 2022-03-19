@@ -1,0 +1,104 @@
+{% load static %}
+{% include 'registration/header.html' %}
+{% block content %}
+<div id="main-wrapper">
+		
+		<!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="ptb72">
+			    <div class="container">
+				<div class="form-head d-flex mb-3 mb-md-4 align-items-start">									
+				</div>				
+				<div class="row blog-view">
+                {% if blogs %}
+                {% for blog in blogs %}
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                         <div class="card">
+                            <div class="card-body">
+                            	<div class="block-head">
+                            		<h4>{{ blog.title }} </h4>
+                            	</div>
+                            	<div class="user-date">
+                            		<div class="">
+                            			<span><i class="far fa-user mr-1"></i></span>{{ blog.author }}
+                            		</div>
+                            		<div class="">
+                            			<span><i class="far fa-clock"></i></span>
+                                            {{blog.created_on|date:"d"}}
+                                            {{blog.created_on|date:"M"}}
+                                            {{blog.created_on|date:"Y"}}
+                            		</div>
+                            	</div>
+                                <div class="new-arrival-product position-relative">
+                                    <div class="new-arrivals-img-contnent">
+                                        <a href="#" class="bloglist-img">
+                                        {% if blog.image_file.url is not None %}
+												<img src="{{blog.image_file.url}}" class="img-fluid" >
+											{% else %}
+												<img src="{% static 'admin-asset/images/No_image_available.png' %}" class="img-fluid">
+											{% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="new-arrival-content">
+                                        <p>{{blog.body|safe|truncatechars:60}}
+                                    <div class="categories-box">
+                                        <a href="#">{{ blog.category.title }}</a>
+                                    </div>
+                                    <div class="comment-box">
+                                        <a href="#" class="mr-2"><i class="far fa-eye mr-1"></i><span>{{blog.views }} </span></a>
+                                        <a href="#"><i class="far fa-comment mr-1"></i>567</a>
+                                    </div>
+                                    <a type="submit" class="btn btn-primary read-morebtn mt-3" class="mr-2" href="{% url 'blog:Blogs4User' blog.id %}"> Read More...</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <div>
+                No Data Found
+                </div>
+                {% endif %}
+                
+                </div>
+                <div class="h-100 row align-items-center">
+                {% if blogs.has_other_pages %}
+                <ul class="pagination">
+                    {% if blogs.has_previous %}
+                    <li><a href="?page={{ blogs.previous_page_number }}">&laquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in blogs.paginator.page_range %}
+                    {% if blogs.number == i %}
+                    <li class="active text-success"><span>{{ i }} <span
+                                class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if blogs.has_next %}
+                    <li><a href="?page={{ blogs.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--**********************************
+            Content body end
+        ***********************************-->
+    </div>
+
+       
+{% endblock %}
+{% include 'registration/footer.html' %}

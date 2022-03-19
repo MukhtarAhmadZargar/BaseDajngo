@@ -1,0 +1,75 @@
+{% include "admin-includes/header.html" %}
+{% block content %}
+{% load static %}
+{% load extras %}
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+			<div class="container-fluid">
+				<div class="form-head d-flex mb-3 mb-md-4 align-items-start">									
+				</div>		
+				<div class="row">
+                 {% if messages %}
+                         {% for message in messages %}
+                       <div class="alert alert-warning">
+                     <a class="close" style= color:#0d6efd; data-dismiss="alert" href="#">×</a> {{ message }}
+                  </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title">Login History</h4>
+                            
+                                <div class="addlocation">
+                                    <a href="{% url 'history:deletehistory' %}"> Clear History</a>
+									</a>
+								</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        <thead>
+                                            <tr>	 			
+                                                <th><strong>User Email</strong></th>
+                                                <th><strong>USER IP</strong></th>
+                                                <th><strong>AGENT</strong></th>
+                                                <th><strong>STATE</strong></th>
+                                                <th><strong>CODE</strong></th>
+                                                <th><strong>CREATE TIME</strong></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for history in 7|login_history %}
+                                            <tr>
+                                                <td>{{ history.user }}</td>
+                                                <td>{{ history.User_Ip }}</td>
+                                                <td>{{ history.User_agent }}</td>
+                                                <td>{% if history.State == "success" %}<p class="text-success">{{history.State }}</p>
+                                                    {% else %}<p class="text-danger">{{history.State }}</p>{% endif %}</td>
+                                                <td>{{ history.Code }}</div></td>
+                                                <td>{{history.create_time}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+{% endblock %}
+
+
+
+
+{% include "admin-includes/footer.html" %}

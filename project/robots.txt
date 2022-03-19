@@ -1,0 +1,7 @@
+url = "http://localhost:8000/post_text_file"
+fin = open('Hello World.txt', 'rb')
+files = {'file': fin}
+try:
+    r = requests.post(url, files=files)
+finally:
+    fin.close()

@@ -1,0 +1,87 @@
+
+{% autoescape off %}
+{% load i18n static %}
+{% endautoescape %}
+{% block html %}
+
+<html><head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+      <title>Ascent Analytics</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="stylesheet">
+   </head>
+   <body style="padding: 0px;font-family: 'Open Sans', sans-serif;font-size: 15px;line-height: 24px;color:#212529;background:#f7f2f1;">
+      <table style="margin: 10px auto; box-shadow:0px 0px 1px rgb(30 150 194 / 12%);background: #fff;border:1px solid #eee;max-width: 700px;box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07); -webkit-box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07);" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+         <tbody><tr>
+            <td style="padding:20px 30px;" class="inner-td">
+               <table width="100%" class="toptable">
+                  <tbody><tr>
+                     <td align="center">
+                         <a href="#0" style="display: inline-block;text-decoration: none;">
+                            <img style="max-width: 100%; margin: 0 auto;" alt="logo" src="{% static 'assets/images/logo.png' %}">
+                         </a>
+                     </td>
+                  </tr>
+               </tbody></table>
+              
+            </td>
+         </tr>
+                <tr>
+                     <td style="padding: 0px 30px 20px 30px">
+                        <table width="100%">
+                            <tbody><tr>
+                              <td style="padding:14px 30px 14px 30px;background:linear-gradient(to right, #4bb2c4, #0f5789)" align="center">
+                                 <h2 style="font-size: 24px;margin:0;color: #fff;line-height: 30px;font-weight: 500">
+                                  Account Verification Code
+                                 </h2>
+                              </td>
+                           </tr>
+                        </tbody></table>
+                     </td>
+                  </tr>
+                  <tr>
+                  <td>
+                  {{ contact.name }}
+                  {{ contact.subject }}
+                  {{msg}}
+                  {{domain}}
+                  <img src="{{file.url}}"  width="24" alt="">
+                  </td>
+                  </tr>
+           <tr>
+            <td style="padding:20px 30px 40px 30px" align="center">
+              <p style="margin-top: 0;line-height: 30px;">
+                Here is your one time password: 
+              </p>
+              <h4 style="color:#232433;font-size: 40px;font-weight: 600;margin-top: 0;margin-bottom: 20px;">{{ user.verification_code }}</h4>
+              <p style="margin-bottom: 0;">This is a validation code, not a password.</p>
+            </td>
+         </tr>
+ <tr>
+   <td style="padding: 20px 30px;background:#F8F8FA" align="center" class="inner-td">
+      <table>
+       <tbody><tr>
+         
+         <td style="vertical-align: top;" align="center">
+            <p style="margin: 0;">
+              For any questions you can reach out to us at <a href="#0" style="color: #145f8e">support@gmail.com</a>
+            </p>
+         </td>
+      </tr>
+   </tbody></table>
+</td>
+</tr>
+<tr>
+   <td style="background: #3d4465">
+     <p style="text-align: center;color: #fff;line-height: 30px;">
+      © 2021 <a href="#0" style="color: #70cddd">Ascent Analytics</a> | All Rights Reserved.
+      <br> Hosted By <a href="https://toxsl.com/" style="text-decoration:none;color:#70cddd " target="_blank">ToXSL Technologies Pvt. Ltd.</a>.</p>
+    </td>
+ </tr>
+</tbody></table>
+
+
+
+</body></html>
+{% endblock %}
